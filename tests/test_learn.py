@@ -1,3 +1,7 @@
+import sys
+print(sys.path)
+sys.path.insert(0, 'C:/Users/Joseph Mockler/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0/LocalCache/local-packages/Python311/Scripts')
+
 import pytest
 import telex.synth
 import pandas
