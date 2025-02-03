@@ -91,7 +91,7 @@ def simoptimize(stl, tracelist,scorefun=scorer.smartscore,optmethod='HYBRID', to
     while not done and attempts < 10:
         attempts = attempts + 1
         if optmethod == "nogradient":
-            res = scipy.optimize.differential_evolution(costfunc, bounds = boundlist, tol = tol)
+            res = scipy.optimize.differential_evolution(costfunc, x0 = initguess, args = stl_stuff, bounds = boundlist)
         else:
             res = scipy.optimize.minimize(costfunc, x0 = initguess, options=options, args = stl_stuff)
 
@@ -129,9 +129,6 @@ def simoptimize(stl, tracelist,scorefun=scorer.smartscore,optmethod='HYBRID', to
         pvalue[prm.name] = x_out[i]
         i = i + 1
     return (pvalue, mvalue, time()-start)
-
-
-
 
 
 
@@ -268,7 +265,6 @@ def postProcess(stlex, pvalue, dirparams, tracelist):
         boundlist.append((float(prm.left),float(prm.right)))
 
     costfunc = lambda pvalue : minscoretracelist(stlex,pvalue,tracelist,scorer.quantitativescore)
-
     
     # expand to ensure all traces satisfy the stl property
     prmvalue = {}
@@ -284,8 +280,6 @@ def postProcess(stlex, pvalue, dirparams, tracelist):
         else:
             raise ValueError("Can't synthesize equality parameter: {}".format(prm.name))
 
-    
-   
     #prmvalue  = pvalue
 
     # contract till all traces still satisfy the stl property
