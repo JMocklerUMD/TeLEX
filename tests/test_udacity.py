@@ -17,7 +17,8 @@ import pandas
 # Upon running - looks like it matches!
 templogicdata = ['G[0, 220046461440] ( ((torque > 1.6)|(torque < -1.6)) -> speed < a? 15;25)']
 
-# Runs paper example 3 - 
+# Runs paper example 3 - CANNOT reproduce, but by inspection of the data,
+# it's not possible to reproduce their results. Maybe they used a different formula/test set?
 templogicdata = ['G[0, 220046461440] ( (angle > 0.06) -> torque > b? -1.5;2)']
 
 #@pytest.mark.parametrize("tlStr", templogicdata)
